@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Testes outsera</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #form-container, #ecommerce-container, #success-message { display: none; }
+    .hidden { display: none; }
+    .product { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+  <!-- Login -->
+  <div id="login-container">
+    <h2>Login</h2>
+    <input type="email" id="login-email" placeholder="Email" /><br><br>
+    <input type="password" id="login-password" placeholder="Senha" /><br><br>
+    <button onclick="login()">Logar</button>
+  </div>
+
+  <!-- Formulário -->
+  <div id="form-container">
+    <h2>Formulário</h2>
+    <input type="text" id="full-name" placeholder="Nome completo" /><br><br>
+    <input type="text" id="cpf" placeholder="CPF" /><br><br>
+    <input type="number" id="birth-year" placeholder="Ano de nascimento" /><br><br>
+    <select id="gender">
+      <option value="">Selecione o sexo</option>
+      <option value="masculino">Masculino</option>
+      <option value="feminino">Feminino</option>
+      <option value="outro">Outro</option>
+    </select><br><br>
+    <input type="tel" id="cellphone" placeholder="Celular" /><br><br>
+    <input type="email" id="form-email" placeholder="Email" /><br><br>
+    <button onclick="goToEcommerce()">Avançar</button>
+  </div>
+
+  <!-- E-commerce -->
+  <div id="ecommerce-container">
+    <h2>Loja Online</h2>
+
+    <div class="product">
+      <span>Produto A - R$10</span>
+      <button onclick="addToCart('Produto A', 10)">Adicionar ao carrinho</button>
+    </div>
+
+    <div class="product">
+      <span>Produto B - R$20</span>
+      <button onclick="addToCart('Produto B', 20)">Adicionar ao carrinho</button>
+    </div>
+
+    <h3>Carrinho:</h3>
+    <ul id="cart"></ul>
+
+    <h3>Pagamento</h3>
+    <select id="payment-method" onchange="handlePaymentChange()">
+      <option value="">Selecione o método de pagamento</option>
+      <option value="pix">PIX</option>
+      <option value="credito">Cartão de Crédito</option>
+    </select><br><br>
+
+    <div id="credit-card-fields" class="hidden">
+      <input type="text" placeholder="Número do Cartão" /><br><br>
+      <input type="text" placeholder="Nome no Cartão" /><br><br>
+      <input type="text" placeholder="Validade (MM/AA)" /><br><br>
+      <input type="text" placeholder="CVV" /><br><br>
+    </div>
+
+    <div id="pix-code" class="hidden">
+      <p><strong>Código PIX:</strong> 123456789ABCDEF</p>
+    </div>
+
+    <button onclick="finalizePurchase()">Finalizar</button>
+  </div>
+
+  <!-- Mensagem de Sucesso -->
+  <div id="success-message">
+    <h2>✅ Compra efetuada com sucesso!</h2>
+  </div>
+
+  <script>
+    function login() {
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+      if (email && password) {
+        document.getElementById("login-container").style.display = "none";
+        document.getElementById("form-container").style.display = "block";
+      } else {
+        alert("Preencha email e senha.");
+      }
+    }
+
+    function goToEcommerce() {
+      document.getElementById("form-container").style.display = "none";
+      document.getElementById("ecommerce-container").style.display = "block";
+    }
+
+    const cart = [];
+
+    function addToCart(product, price) {
+      cart.push({ product, price });
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartList = document.getElementById("cart");
+      cartList.innerHTML = "";
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.product} - R$${item.price}`;
+        cartList.appendChild(li);
+      });
+    }
+
+    function handlePaymentChange() {
+      const method = document.getElementById("payment-method").value;
+      document.getElementById("credit-card-fields").classList.add("hidden");
+      document.getElementById("pix-code").classList.add("hidden");
+
+      if (method === "credito") {
+        document.getElementById("credit-card-fields").classList.remove("hidden");
+      } else if (method === "pix") {
+        document.getElementById("pix-code").classList.remove("hidden");
+      }
+    }
+
+    function finalizePurchase() {
+      const method = document.getElementById("payment-method").value;
+      if (!method) {
+        alert("Selecione uma forma de pagamento.");
+        return;
+      }
+
+      document.getElementById("ecommerce-container").style.display = "none";
+      document.getElementById("success-message").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>

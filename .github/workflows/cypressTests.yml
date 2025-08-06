@@ -1,0 +1,48 @@
+name: Cypress Tests
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  run-cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout do código
+        uses: actions/checkout@v3
+
+      - name: 🟢 Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📦 Instalar dependências
+        working-directory: ./testeCypress
+        run: npm install
+
+      - name: 🚀 Executar testes Cypress
+        working-directory: ./testeCypress
+        run: |
+          npx cypress run --e2e
+
+      - name: 📁 Upload de screenshots (se houver falhas)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: screenshots
+          path: testeCypress/cypress/screenshots/
+
+      - name: 📁 Upload de vídeos (opcional)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: videos
+          path: testeCypress/cypress/videos/
+
+      - name: 📁 Upload de relatórios HTML (caso gerados)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-reports
+          path: testeCypress/cypress/reports/

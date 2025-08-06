@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Relatório Simulado - Testes Cypress JSONPlaceholder API</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 2rem;
+    background: #f9f9f9;
+    color: #333;
+  }
+  h1 {
+    color: #2c3e50;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 1rem;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    background: white;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 0.6rem 1rem;
+    text-align: left;
+  }
+  th {
+    background-color: #34495e;
+    color: white;
+  }
+  tr:nth-child(even) {
+    background-color: #f4f6f7;
+  }
+  .pass {
+    color: #27ae60;
+    font-weight: bold;
+  }
+  .fail {
+    color: #c0392b;
+    font-weight: bold;
+  }
+  .summary {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #ecf0f1;
+    border-left: 6px solid #2980b9;
+    max-width: 500px;
+  }
+</style>
+</head>
+<body>
+  <h1>Relatório Simulado dos Testes Cypress - JSONPlaceholder API</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Teste</th>
+        <th>Resultado</th>
+        <th>Status Code Esperado</th>
+        <th>Status Code Obtido</th>
+        <th>Tempo (ms)</th>
+        <th>Observações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>GET /posts - deve retornar uma lista de posts</td>
+        <td class="pass">Passou</td>
+        <td>200</td>
+        <td>200</td>
+        <td>120</td>
+        <td>Resposta válida, array com &gt;0 itens</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>GET /posts/1 - deve retornar um post específico</td>
+        <td class="pass">Passou</td>
+        <td>200</td>
+        <td>200</td>
+        <td>95</td>
+        <td>Retornou objeto com id = 1</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>GET /posts/9999 - deve retornar vazio ou 404</td>
+        <td class="pass">Passou</td>
+        <td>200 ou 404</td>
+        <td>404</td>
+        <td>90</td>
+        <td>Retornou 404 Not Found</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>POST /posts - deve criar um novo post</td>
+        <td class="pass">Passou</td>
+        <td>201</td>
+        <td>201</td>
+        <td>150</td>
+        <td>Novo post criado com id gerado</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>POST /posts - falhar com corpo vazio</td>
+        <td class="pass">Passou</td>
+        <td>201</td>
+        <td>201</td>
+        <td>140</td>
+        <td>API aceita corpo vazio, retorna id</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>POST /posts - falhar com dados inválidos</td>
+        <td class="pass">Passou</td>
+        <td>400 ou 201</td>
+        <td>201</td>
+        <td>130</td>
+        <td>Aceitou string inválida, retornou 201</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>PUT /posts/1 - atualizar post existente</td>
+        <td class="pass">Passou</td>
+        <td>200</td>
+        <td>200</td>
+        <td>110</td>
+        <td>Título atualizado conforme esperado</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>PUT /posts/9999 - tentar atualizar post inexistente</td>
+        <td class="pass">Passou</td>
+        <td>200</td>
+        <td>200</td>
+        <td>115</td>
+        <td>API respondeu 200 mesmo sem recurso real</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>PUT /posts/1 - corpo inválido</td>
+        <td class="pass">Passou</td>
+        <td>400 ou 200</td>
+        <td>200</td>
+        <td>125</td>
+        <td>Aceitou corpo inválido, respondeu 200</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>DELETE /posts/1 - deve deletar um post existente</td>
+        <td class="pass">Passou</td>
+        <td>200</td>
+        <td>200</td>
+        <td>90</td>
+        <td>Post deletado com sucesso</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>DELETE /posts/9999 - deletar post inexistente deve retornar sucesso mesmo assim</td>
+        <td class="pass">Passou</td>
+        <td>200</td>
+        <td>200</td>
+        <td>100</td>
+        <td>Resposta 200 mesmo para ID inexistente</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>DELETE sem ID - deve retornar erro 404</td>
+        <td class="pass">Passou</td>
+        <td>404 ou 405</td>
+        <td>404</td>
+        <td>105</td>
+        <td>Requisição sem ID retornou 404</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <h2>Resumo Geral</h2>
+    <ul>
+      <li>Total de testes: <strong>12</strong></li>
+      <li>Testes aprovados: <strong>12</strong></li>
+      <li>Testes falhos: <strong>0</strong></li>
+      <li>Tempo médio: ~115 ms por teste</li>
+      <li>Observação: API JSONPlaceholder é uma API fake e aceita algumas situações que APIs reais rejeitariam (ex: corpo vazio, dados inválidos)</li>
+    </ul>
+  </div>
+</body>
+</html>
