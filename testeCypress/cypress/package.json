@@ -18,5 +18,5 @@
     "cypress-real-events": "^1.13.0",
     "cypress-xpath": "^2.0.1",
     "moment": "^2.30.1"
-  },
+  }
 }
