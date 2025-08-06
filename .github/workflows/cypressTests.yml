@@ -10,10 +10,10 @@ jobs:
 
     steps:
       - name: ⬇️ Checkout do código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🟢 Configurar Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
@@ -28,21 +28,21 @@ jobs:
 
       - name: 📁 Upload de screenshots (se houver falhas)
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: screenshots
           path: testeCypress/cypress/screenshots/
 
       - name: 📁 Upload de vídeos (opcional)
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: videos
           path: testeCypress/cypress/videos/
 
       - name: 📁 Upload de relatórios HTML (caso gerados)
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-reports
           path: testeCypress/cypress/reports/
