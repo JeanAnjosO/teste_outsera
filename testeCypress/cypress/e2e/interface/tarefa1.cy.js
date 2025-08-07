@@ -6,18 +6,10 @@
 
 describe('Teste de Login e Navegação para Formulário', () => {
   beforeEach(() => {
-    // Altere para a URL onde o index.html está disponível
-    cy.visit('http://localhost:8080/index.html');
+    cy.login('usuario@teste.com', 'senha123');
   });
 
   it('Deve logar com sucesso e acessar o formulário', () => {
-    // Preenche email e senha na tela de login
-    cy.get('#login-email').type('usuario@teste.com');
-    cy.get('#login-password').type('senha123');
-
-    // Clica no botão de logar
-    cy.get('button[type="submit"]').click();
-
     // Valida que a tela de login desapareceu
     cy.get('#login-container').should('not.be.visible');
 
