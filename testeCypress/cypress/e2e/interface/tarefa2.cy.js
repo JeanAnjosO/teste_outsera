@@ -1,21 +1,11 @@
 describe('Fluxo de Checkout Simples', () => {
   beforeEach(() => {
-    cy.visit('index.html');
+    cy.login('usuario@teste.com', 'senha123');
   });
 
   it('deve completar o fluxo de checkout com pagamento via crédito', () => {
-    // Login
-    cy.get('#login-email').type('usuario@teste.com');
-    cy.get('#login-password').type('senha123');
-    cy.contains('Logar').click();
-
     // Formulário de cadastro
-    cy.get('#full-name').type('João da Silva');
-    cy.get('#cpf').type('12345678900');
-    cy.get('#birth-year').type('1990');
-    cy.get('#gender').select('masculino');
-    cy.get('#cellphone').type('11999999999');
-    cy.get('#form-email').type('joao@teste.com');
+    cy.preencheFormsCadastro('João da Silva', '12345678900', '1990', 'masculino', '11999999999', 'joao@teste.com', 'joao@teste.com')
     cy.contains('Avançar').click();
 
     // Adição de produtos
@@ -29,11 +19,7 @@ describe('Fluxo de Checkout Simples', () => {
     // Pagamento com crédito
     cy.get('#payment-method').select('credito');
 
-    cy.get('#credit-card-fields').should('be.visible');
-    cy.get('#credit-card-fields input').eq(0).type('4111111111111111'); // número
-    cy.get('#credit-card-fields input').eq(1).type('João da Silva'); // nome
-    cy.get('#credit-card-fields input').eq(2).type('12/30'); // validade
-    cy.get('#credit-card-fields input').eq(3).type('123'); // cvv
+    cy.preencheFormsCartaoCred('4111111111111111', 'João da Silva', '12/30', '123')
 
     // Finalizar compra
     cy.contains('Finalizar').click();
