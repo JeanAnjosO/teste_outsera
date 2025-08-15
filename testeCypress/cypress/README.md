@@ -23,8 +23,8 @@ Este projeto contém testes automatizados utilizando o **Cypress** para validar 
 1. Clone o repositório (caso ainda não tenha feito):
 
 ```bash
-git clone https://seu-repositorio-aqui.git
-cd nome-do-projeto
+git clone https://github.com/JeanAnjosO/teste_outsera.git
+cd teste_outsera
 ```
 
 ### 2.  Instale as dependencias:

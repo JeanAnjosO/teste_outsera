@@ -1,4 +1,4 @@
 testeCypress/cypress/screenshots/
 testeCypress/cypress/videos/
 testeCypress/cypress/reports/
-testeCypress/node_modules
+testeCypress/cypress/node_modules

@@ -18,11 +18,11 @@ jobs:
           node-version: 18
 
       - name: 📦 Instalar dependências
-        working-directory: ./testeCypress/cypress
+        working-directory: ./teste_outsera/testeCypress/cypress
         run: npm install
 
       - name: 🚀 Executar testes Cypress
-        working-directory: ./testeCypress/cypress
+        working-directory: ./teste_outsera/testeCypress/cypress
         run: |
           npx cypress run
 

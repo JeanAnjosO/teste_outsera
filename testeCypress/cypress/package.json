@@ -12,11 +12,13 @@
   "author": "Jean Anjos",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^13.7.1",
     "cypress-drag-drop": "^1.1.1",
     "cypress-plugin-xhr-toggle": "^1.2.1",
     "cypress-real-events": "^1.13.0",
     "cypress-xpath": "^2.0.1",
     "moment": "^2.30.1"
+  },
+  "devDependencies": {
+    "cypress": "^14.5.4"
   }
 }
